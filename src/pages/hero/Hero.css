@@ -33,7 +33,7 @@
 }
 .overlay_text div:nth-child(1) {
   font-size: 6.4rem;
-  color: #ea3266;
+  color: var(--heart-red);
 }
 .overlay_text div:nth-child(2) {
   font-size: 3.6rem;
@@ -51,8 +51,7 @@
   margin: 2rem;
   gap: 3rem;
 }
-/* .card_hr:hover {
-} */
+
 .card_hr .card_hr_content {
   max-width: 85%;
 }
