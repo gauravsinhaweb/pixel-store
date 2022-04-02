@@ -1,0 +1,185 @@
+/* wrapper  */
+.wrapper_main {
+  user-select: none;
+}
+.card_hr {
+  cursor: pointer;
+}
+/* head  */
+.head_text {
+  text-transform: capitalize;
+  padding: 0 3rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.view_all {
+  text-transform: uppercase;
+}
+/* banner */
+.banner {
+  position: relative;
+}
+.banner > img {
+  object-fit: cover;
+  object-position: 10% center;
+  min-height: 20rem;
+}
+.overlay_text {
+  position: absolute;
+  font-weight: 700;
+  z-index: var(--index-99);
+  margin: 30rem 2rem;
+  padding: 2rem;
+}
+.overlay_text div:nth-child(1) {
+  font-size: 6.4rem;
+  color: #ea3266;
+}
+.overlay_text div:nth-child(2) {
+  font-size: 3.6rem;
+  color: var(--black);
+}
+.overlay_text div:nth-child(3) {
+  font-size: 2.4rem;
+  color: var(--text-primary);
+}
+.overlay_text button {
+  margin: 4rem 0;
+}
+/*product card */
+.card_hr .btn_wrapper_hr {
+  margin: 2rem;
+  gap: 3rem;
+}
+/* .card_hr:hover {
+} */
+.card_hr .card_hr_content {
+  max-width: 85%;
+}
+.card_hr_img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.wrapper_card .btn {
+  padding: 1rem;
+}
+
+.wrapper_card {
+  flex-flow: row wrap;
+  justify-content: center;
+  background-color: var(--bg-color);
+}
+.card_hero {
+  margin: 0;
+  width: 30rem;
+  transform: scale(0.8);
+  margin: -3rem 0;
+}
+.card_name_hero {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 30rem;
+}
+.card_img_hero {
+  padding: 1rem;
+  width: 70rem;
+  height: 25rem;
+  object-fit: cover;
+}
+.img_curve {
+  margin-top: -20rem;
+}
+.hero_title {
+  margin: 8rem 0;
+}
+.hero_title > .h2 {
+  font-size: 3rem;
+}
+
+@media screen and (max-width: 75rem) {
+  .wrapper_card .card_hr {
+    width: 25rem;
+  }
+  .overlay_text div:nth-child(1) {
+    font-size: 6rem;
+  }
+  .overlay_text div:nth-child(2) {
+    font-size: 3.5rem;
+  }
+  .overlay_text div:nth-child(3) {
+    font-size: 2rem;
+  }
+  .overlay_text {
+    margin: 18rem 1rem;
+  }
+  .banner > img {
+    object-fit: cover;
+    object-position: 50% center;
+    min-height: 50rem;
+  }
+  .img_curve > img {
+    object-fit: cover;
+    object-position: none;
+    min-height: 20rem;
+  }
+  .hero_title {
+    margin: 5rem 0;
+  }
+}
+@media screen and (max-width: 60rem) {
+  .wrapper_card .card_hr {
+    width: 24rem;
+  }
+  .overlay_text div:nth-child(1) {
+    font-size: 5rem;
+  }
+  .overlay_text div:nth-child(2) {
+    font-size: 2.5rem;
+  }
+  .overlay_text div:nth-child(3) {
+    font-size: 1.5rem;
+  }
+  .overlay_text {
+    margin: 12rem 0rem;
+  }
+  .banner_offer > img {
+    object-fit: cover;
+    object-position: 16% center;
+    min-height: 30rem;
+  }
+  .hero_title {
+    margin: 2rem 0;
+  }
+}
+@media screen and (max-width: 30rem) {
+  .wrapper_card .card_hr {
+    width: 35rem;
+  }
+  .overlay_text div:nth-child(1) {
+    font-size: 4.5rem;
+  }
+  .overlay_text div:nth-child(2) {
+    font-size: 2rem;
+  }
+  .overlay_text div:nth-child(3) {
+    font-size: 1.2rem;
+  }
+  .overlay_text {
+    margin: 10rem 0rem;
+  }
+  .banner > img {
+    object-fit: cover;
+    object-position: 60% center;
+    min-height: 50rem;
+  }
+  .img_curve > img {
+    object-fit: cover;
+    object-position: none;
+    min-height: 20rem;
+  }
+  .hero_title {
+    margin: 1rem 0;
+  }
+}
