@@ -8,7 +8,6 @@ import "./Navbar.css";
 import { useAppContext } from "../../context/AppContext";
 export function Navbar() {
   const { appDispatch } = useAppContext();
-  const encodedToken = localStorage.getItem("token");
 
   return (
     <>
@@ -37,11 +36,6 @@ export function Navbar() {
 
           <div className="">
             <ul className="flex nav_icons">
-              {/* <li>
-                <button id="nav-modal" className="btn btn-primary btn-login">
-                  login
-                </button>
-              </li> */}
               <li
                 className="wrapper_badge"
                 onClick={() =>
