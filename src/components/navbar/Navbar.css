@@ -1,0 +1,14 @@
+nav {
+  position: fixed;
+  z-index: var(--index-999);
+  width: 100%;
+}
+.wrapper_badge {
+  font-size: 2.5rem;
+}
+.wrapper_badge:hover {
+  color: var(--btn-yellow);
+}
+.category_list li:hover {
+  color: var(--btn-yellow);
+}
