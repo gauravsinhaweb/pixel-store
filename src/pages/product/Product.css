@@ -51,10 +51,10 @@ main {
   background-color: var(--white);
 }
 .emptyWishlist {
-  color: #cccccc;
+  color: var(--bg-color-light);
 }
 .filledWishlist {
-  color: #f22426;
+  color: var(--heart-red);
 }
 .btn_add_to_cart span {
   padding: 1rem;
