@@ -1,0 +1,23 @@
+.modal > .card-content * {
+  margin: 8px 0;
+}
+.wrapper_modal > .modal_title {
+  padding: 0;
+  border-bottom: 1px solid var(--secondary-li);
+}
+.btn_modal > .close-modal {
+  font-weight: 100;
+}
+.modal > .wrapper_modal {
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.modal > .modal_box {
+  width: 70rem;
+}
+.wrapper_content {
+  width: fit-content;
+}
+.modal > .card-content {
+  padding: 0;
+}
