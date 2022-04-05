@@ -5,8 +5,16 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [appState, appDispatch] = useReducer(appReducerHandler, {
+    product: [],
     loginModal: false,
     signUpModal: false,
+    wishlist: [],
+    cart: [],
+    cartItems: 0,
+    totalPrice: 0,
+    cartLength: 0,
+    wishListLength: 0,
+    encodedToken: localStorage.getItem("token"),
   });
 
   const value = { appState, appDispatch };
