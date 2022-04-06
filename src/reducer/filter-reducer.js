@@ -32,7 +32,8 @@ export const filterReducerHandler = (filter, action) => {
         cartItems: filter.cartItems - 1,
         totalPrice: filter.totalPrice - Number(action.payload),
       };
-
+    case "CLEAR-FILTER":
+      return { ...action.payload };
     default:
       return filter;
   }
