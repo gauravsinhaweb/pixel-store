@@ -14,6 +14,8 @@ import {
   ProductDetail,
   SignUp,
   Login,
+  Wishlist,
+  Cart,
 } from "../pages/pages-index";
 
 const PRODUCT_API = "/api/products";
@@ -52,6 +54,8 @@ function RoutePage() {
                 path={`/product/:${productID}`}
                 element={<ProductDetail />}
               />
+              <Route exact path="/wishlist" element={<Wishlist />} />
+              <Route exact path="/cart" element={<Cart />} />
               <Route exact path="/mock" element={<MockAPI />} />
             </Routes>{" "}
             <Login />

@@ -1,0 +1,25 @@
+.card_wishlist {
+  max-width: 50rem;
+  transform: scale(0.9);
+}
+.img_product {
+  width: 20rem;
+}
+.btn_wrapper_hr {
+  flex-grow: 1;
+}
+.btn_add_to_cart {
+  width: 100%;
+}
+.btn_wrapper_hr > .btn_add_to_cart {
+  background-color: var(--btn-yellow);
+  color: var(--black);
+  border: 1px solid transparent;
+}
+.text-head {
+  color: var(--text-primary);
+  padding-top: 8rem;
+}
+.empty_wishlist {
+  padding-top: 20rem;
+}
