@@ -39,7 +39,7 @@ export const ProductDisplay = (props) => {
           },
         }
       );
-      appDispatch({ type: "CART", payload: response.data.cart });
+      appDispatch({ type: "PRODUCT-CART", payload: response.data.cart });
       isProductInWishlist(product, response.data.cart);
       appDispatch({ type: "CART-LENGTH", value: response.data.cart.length });
       // saving the encodedToken in the localStorage

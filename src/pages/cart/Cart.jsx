@@ -12,13 +12,14 @@ export const Cart = () => {
 
   const { appState, appDispatch } = useAppContext();
   const [cartItemValue, setCartItemValue] = useState(0);
-
+  const productCart = appState.cart;
   useEffect(() => {
     (async () => {
       setCartItemValue(appState.cartItems);
       try {
         const response = await axios.get("/api/user/cart");
-        response && appDispatch({ type: "CART", payload: response.data.cart });
+        response &&
+          appDispatch({ type: "PRODUCT-CART", payload: response.data.cart });
       } catch (error) {
         if (error.response.status === 500) {
           alert("you need to login");
@@ -32,26 +33,16 @@ export const Cart = () => {
     })();
   }, [appDispatch, appState.cartItems]);
 
-  // const removeFromCart = async (appState.cart.id) => {
-  //   try {
-  //     const res = await axios.delete(`/api/user/cart/${_id}`);
-  //     if (res.status === 200) {
-  //       appDispatch({ type: "REMOVE-FROM-CART", payload: res.data.cart });
-  //     }
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
   const priceHandler = {
     price:
-      appState.cart &&
-      appState.cart.reduce(
+      productCart &&
+      productCart.reduce(
         (acc, item) => acc + Number(item.price) + appState.totalPrice,
         0
       ),
     discount:
-      appState.cart &&
-      appState.cart.reduce(
+      productCart &&
+      productCart.reduce(
         (acc, item) =>
           acc +
           (Number(item.price) - (50 / 100) * Number(item.price)) +
@@ -59,8 +50,8 @@ export const Cart = () => {
         0
       ),
     delivery:
-      appState.cart &&
-      appState.cart.reduce((acc, item) => acc + Number(item.price), 0) +
+      productCart &&
+      productCart.reduce((acc, item) => acc + Number(item.price), 0) +
         appState.totalPrice * 0.05,
   };
   const isTokenInLocalStorage = localStorage.getItem("token");
@@ -69,15 +60,13 @@ export const Cart = () => {
       <Navbar />
       <main>
         <div className="wrapper_cart flex">
-          {isTokenInLocalStorage &&
-          appState.cart &&
-          appState.cart.length !== 0 ? (
+          {isTokenInLocalStorage && productCart && productCart.length !== 0 ? (
             <>
               {" "}
               <div className="wrapper_items">
                 ( <div className="text_cl h3 text-head">Shopping Cart</div>
-                {appState.cart &&
-                  appState.cart.map(
+                {productCart &&
+                  productCart.map(
                     ({
                       _id,
                       name,
