@@ -6,7 +6,23 @@ export const Sidebar = (props) => {
 
   const [categoryList, setCategoryList] = useState();
   const [loading, setLoading] = useState(false);
-
+  const initialFilterState = {
+    category: [],
+    rating: 0,
+    offerDealOfDay: false,
+    offerBonanza: false,
+    sortByPrice: "",
+    outOfStock: false,
+    fastDelivery: false,
+    priceRange: 1000,
+    clearAll: true,
+  };
+  const clearFilterHandler = () => {
+    dispatch({
+      type: "CLEAR-FILTER",
+      payload: initialFilterState,
+    });
+  };
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios(CATEGORY_API);
@@ -21,11 +37,17 @@ export const Sidebar = (props) => {
         <div className="wrapper_filter_head flex ">
           <h3 className="filter_head_text text_cl kodchasan">filters</h3>
 
-          <button className="btn-link text_uc kodchasan">clear</button>
+          <button
+            className="btn-link text_uc kodchasan"
+            onClick={clearFilterHandler}
+          >
+            clear
+          </button>
         </div>{" "}
         <p>
           {" "}
           <input
+            checked={filter.outOfStock}
             name="filter"
             type="checkbox"
             id="includeOutOfStock"
@@ -39,6 +61,7 @@ export const Sidebar = (props) => {
         <h3 className="filter_head_text text_cl kodchasan">offer</h3>
         <p>
           <input
+            checked={filter.offerDealOfDay}
             id="offer-dealOfTheDay"
             className="filter_input text_cl"
             type="checkbox"
@@ -53,6 +76,7 @@ export const Sidebar = (props) => {
         </p>
         <p>
           <input
+            checked={filter.offerBonanza}
             id="offer-bonanza"
             className="filter_input text_cl"
             type="checkbox"
@@ -88,6 +112,7 @@ export const Sidebar = (props) => {
                 id={_id}
                 className="filter_input "
                 type="checkbox"
+                checked={filter.category.some((item) => item === categoryName)}
                 value={categoryName}
                 onClick={(e) =>
                   dispatch({
@@ -112,6 +137,7 @@ export const Sidebar = (props) => {
             id="filter_4_star"
             className="filter_input"
             type="radio"
+            checked={!filter.rating ? false : null}
             onClick={() => dispatch({ type: "RATING", payload: 4 })}
           />
           <label htmlFor="filter_4_star">4 Stars & above</label>
@@ -122,6 +148,7 @@ export const Sidebar = (props) => {
             id="filter_3_star"
             className="filter_input"
             type="radio"
+            checked={!filter.rating ? false : null}
             onClick={() => dispatch({ type: "RATING", payload: 3 })}
           />
           <label htmlFor="filter_3_star">3 Stars & above</label>
@@ -132,6 +159,7 @@ export const Sidebar = (props) => {
             id="filter_2_star"
             className="filter_input"
             type="radio"
+            checked={!filter.rating ? false : null}
             onClick={() => dispatch({ type: "RATING", payload: 2 })}
           />
           <label htmlFor="filter_2_star">2 Stars & above</label>
@@ -142,6 +170,7 @@ export const Sidebar = (props) => {
             id="filter_1_star"
             className="filter_input"
             type="radio"
+            checked={!filter.rating ? false : null}
             onClick={() => dispatch({ type: "RATING", payload: 1 })}
           />
           <label htmlFor="filter_1_star">1 Stars & above</label>
@@ -153,6 +182,7 @@ export const Sidebar = (props) => {
             name="price-sort"
             type="radio"
             id="price-lh"
+            checked={!filter.sortByPrice ? false : null}
             onChange={() => dispatch({ type: "LOW-HIGH" })}
           />
           <label htmlFor="price-lh"> Price - Low to High</label>
@@ -162,8 +192,8 @@ export const Sidebar = (props) => {
             className="filter_input"
             name="price-sort"
             type="radio"
+            checked={!filter.sortByPrice ? false : null}
             id="price-hl"
-            onChange={() => dispatch({ type: "HIGH-LOW" })}
           />
           <label htmlFor="price-hl">Price - High to Low</label>
         </p>
