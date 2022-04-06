@@ -18,6 +18,7 @@ import {
   Cart,
   Page404,
 } from "../pages/pages-index";
+import "../App.css";
 
 const PRODUCT_API = "/api/products";
 function RoutePage() {
