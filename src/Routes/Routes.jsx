@@ -19,6 +19,7 @@ import {
   Page404,
 } from "../pages/pages-index";
 import "../App.css";
+import { ScrollToTop } from "../utils/utils-index";
 
 const PRODUCT_API = "/api/products";
 function RoutePage() {
@@ -40,6 +41,7 @@ function RoutePage() {
       <div className="container">
         {loading ? (
           <Router>
+            <ScrollToTop />
             <Routes>
               <Route
                 exact

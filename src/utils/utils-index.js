@@ -10,5 +10,4 @@ export {
   postWishlist,
   isProductInWishlist,
 } from "./wishlist/wishlist-utils.js";
-
-// export { filterReducerHandler } from "./reducer/reducer";
+export { ScrollToTop } from "./App-function/scrollToTop";
