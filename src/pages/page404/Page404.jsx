@@ -6,7 +6,7 @@ export const Page404 = () => {
   return (
     <>
       <Navbar />
-      <main className="">
+      <main>
         <div className="text_cl h3 text-head text-center">Oop! Error 404</div>
         <br />
         <br />
