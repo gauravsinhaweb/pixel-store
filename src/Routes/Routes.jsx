@@ -16,7 +16,10 @@ import {
   Login,
   Wishlist,
   Cart,
+  Page404,
 } from "../pages/pages-index";
+import "../App.css";
+import { ScrollToTop } from "../utils/utils-index";
 
 const PRODUCT_API = "/api/products";
 function RoutePage() {
@@ -38,6 +41,7 @@ function RoutePage() {
       <div className="container">
         {loading ? (
           <Router>
+            <ScrollToTop />
             <Routes>
               <Route
                 exact
@@ -56,13 +60,16 @@ function RoutePage() {
               />
               <Route exact path="/wishlist" element={<Wishlist />} />
               <Route exact path="/cart" element={<Cart />} />
+              <Route path="*" element={<Page404 />} />
               <Route exact path="/mock" element={<MockAPI />} />
             </Routes>{" "}
             <Login />
             <SignUp />
           </Router>
         ) : (
-          <p>loading</p>
+          <div className="loader">
+            <h1 className="loader-text kodchasan">Loading..</h1>
+          </div>
         )}
       </div>
     </>

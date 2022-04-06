@@ -62,9 +62,8 @@ export const Cart = () => {
         <div className="wrapper_cart flex">
           {isTokenInLocalStorage && productCart && productCart.length !== 0 ? (
             <>
-              {" "}
               <div className="wrapper_items">
-                ( <div className="text_cl h3 text-head">Shopping Cart</div>
+                <div className="text_cl h3 text-head">Shopping Cart</div>
                 {productCart &&
                   productCart.map(
                     ({
@@ -147,7 +146,7 @@ export const Cart = () => {
                     )
                   )}
               </div>
-              )
+
               <div className="card card-content">
                 <div className="flex modal_title">
                   <div className="title h3 text_uc">Price Details</div>

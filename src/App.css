@@ -1,0 +1,9 @@
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.loader-text {
+  font-size: 4rem;
+}
