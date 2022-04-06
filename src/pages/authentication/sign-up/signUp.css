@@ -1,5 +1,5 @@
-.modal > .card-content * {
-  margin: 8px 0;
+.modal_content > form * {
+  margin: 5px 0;
 }
 .wrapper_modal > .modal_title {
   padding: 0;
@@ -20,4 +20,12 @@
 }
 .modal > .card-content {
   padding: 0;
+}
+.inp {
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+.eye {
+  font-size: 1.5rem;
+  cursor: pointer;
 }

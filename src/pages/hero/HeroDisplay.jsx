@@ -8,7 +8,7 @@ export const HeroDisplay = (props) => {
   } = props;
   return (
     <>
-      <div key={_id}>
+      <div>
         <Link to={`/product/${_id}`}>
           {" "}
           <div className="card_hr flex-center card_hero">

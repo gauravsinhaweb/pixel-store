@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-import "./Sign-up.css";
+import "./signUp.css";
 import { BsXLg } from "react-icons/bs";
 import { useAppContext } from "../../../context/AppContext";
 import axios from "axios";
+import { RiEyeCloseLine, RiEyeFill } from "react-icons/ri";
 
 export const SignUp = () => {
   let signUpDisplay;
   const { appState, appDispatch } = useAppContext();
+  const [showPassword, setShowPassword] = useState({
+    value: false,
+  });
   const [signupData, setSignupData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
+    passwordConfirm: "",
   });
   if (appState.signUpModal === true) {
     signUpDisplay = "block";
@@ -22,16 +27,23 @@ export const SignUp = () => {
 
   const signupHandler = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(`/api/auth/signup`, signupData);
-      // saving the encodedToken in the localStorage
-      localStorage.setItem("token", response.data.encodedToken);
-      console.log(response);
-      appDispatch({ type: "SIGNUP-MODAL", payload: false });
-    } catch (error) {
-      alert("invalid credentials");
-      console.log(error);
+    if (signupData.password !== signupData.passwordConfirm) {
+      alert("Passwords do not match");
+    } else {
+      try {
+        const response = await axios.post(`/api/auth/signup`, signupData);
+        // saving the encodedToken in the localStorage
+        localStorage.setItem("token", response.data.encodedToken);
+        console.log(response);
+        appDispatch({ type: "SIGNUP-MODAL", payload: false });
+      } catch (error) {
+        alert("invalid credentials");
+        console.log(error);
+      }
     }
+  };
+  const showPasswordHandler = () => {
+    setShowPassword({ ...showPassword, value: !showPassword.value });
   };
   return (
     <>
@@ -70,7 +82,7 @@ export const SignUp = () => {
               <input
                 type="text"
                 id="firstName"
-                className="basic_inp inp_md"
+                className="inp_md inp"
                 onChange={(e) => {
                   setSignupData({
                     ...signupData,
@@ -78,14 +90,14 @@ export const SignUp = () => {
                   });
                 }}
                 placeholder="John"
-              />{" "}
+              />
               <label className="p text_cl" htmlFor="lastName">
                 last name
               </label>
               <input
                 type="text"
                 id="lastName"
-                className="basic_inp inp_md"
+                className="inp_md inp"
                 onChange={(e) => {
                   setSignupData({
                     ...signupData,
@@ -100,7 +112,7 @@ export const SignUp = () => {
               <input
                 type="email"
                 id="email-signup"
-                className="basic_inp inp_md"
+                className="inp_md inp"
                 onChange={(e) => {
                   setSignupData({
                     ...signupData,
@@ -112,17 +124,39 @@ export const SignUp = () => {
               <label className="p text_cl" htmlFor="password-signup">
                 password
               </label>
+              <div className="flex">
+                <span>
+                  <input
+                    type={showPassword.value ? "text" : "password"}
+                    id="password-signup"
+                    className="inp_md inp"
+                    onChange={(e) => {
+                      setSignupData({
+                        ...signupData,
+                        password: e.target.value,
+                      });
+                    }}
+                    placeholder="password"
+                  />
+                </span>
+                <span className="eye flex-center" onClick={showPasswordHandler}>
+                  {showPassword.value ? <RiEyeFill /> : <RiEyeCloseLine />}
+                </span>
+              </div>
+              <label className="p text_cl" htmlFor="password-confirm">
+                password confirm
+              </label>
               <input
                 type="password"
-                id="password-signup"
-                className="basic_inp inp_md"
+                id="password-confirm"
+                className="inp_md inp"
                 onChange={(e) => {
                   setSignupData({
                     ...signupData,
-                    password: e.target.value,
+                    passwordConfirm: e.target.value,
                   });
                 }}
-                placeholder="password"
+                placeholder="password confirm"
               />
               <div className="flex wrapper_modal_btn">
                 <button className="btn btn-cta text_cl btn_login">

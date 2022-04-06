@@ -9,6 +9,9 @@ import { useAppContext } from "../../context/AppContext";
 export function Navbar() {
   const { appDispatch } = useAppContext();
 
+  const loginHandler = () => {
+    appDispatch({ type: "LOGIN-MODAL", payload: true });
+  };
   return (
     <>
       <nav className="h3">
@@ -36,12 +39,7 @@ export function Navbar() {
 
           <div className="">
             <ul className="flex nav_icons">
-              <li
-                className="wrapper_badge"
-                onClick={() =>
-                  appDispatch({ type: "LOGIN-MODAL", payload: true })
-                }
-              >
+              <li className="wrapper_badge" onClick={loginHandler}>
                 <FiLogIn />
               </li>
               <Link to="/wishlist">
