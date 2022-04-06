@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Link as LinkToID } from "react-scroll";
 import { Footer, Navbar } from "../../components/components-index.js";
-import "./Hero.css";
+import "./hero.css";
 import { HeroDisplay } from "./HeroDisplay.jsx";
 
 export const Hero = (props) => {

@@ -10,7 +10,7 @@ import {
   getProductByCategory,
   getSortedRating,
 } from "../../utils/utils-index";
-import "./Product.css";
+import "./product.css";
 import { ProductDisplay } from "./ProductDisplay";
 import { Sidebar } from "./Sidebar";
 

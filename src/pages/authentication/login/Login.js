@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Login.css";
+import "./login.css";
 import { BsXLg } from "react-icons/bs";
 import { useAppContext } from "../../../context/AppContext";
 import axios from "axios";
@@ -47,6 +47,9 @@ export const Login = () => {
       password: "adarshbalika",
     });
   };
+  const modalHandler = () => {
+    appDispatch({ type: "LOGIN-MODAL", payload: false });
+  };
   return (
     <>
       <header
@@ -67,12 +70,7 @@ export const Login = () => {
             <div className="flex wrapper_head">
               <h2 className="h2">Login</h2>
               <div>
-                <button
-                  className="btn_modal"
-                  onClick={() =>
-                    appDispatch({ type: "LOGIN-MODAL", payload: false })
-                  }
-                >
+                <button className="btn_modal" onClick={modalHandler}>
                   <BsXLg />
                 </button>
               </div>
