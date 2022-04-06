@@ -14,6 +14,9 @@ export function Navbar() {
     appDispatch({ type: "TOKEN", payload: null });
     Navigate("/");
   };
+  const loginModalHandler = () => {
+    appDispatch({ type: "LOGIN-MODAL", payload: true });
+  };
   const isTokenInLocalStorage = localStorage.getItem("token");
   return (
     <>
@@ -53,12 +56,7 @@ export function Navbar() {
                   </button>
                 </li>
               ) : (
-                <li
-                  className="wrapper_badge"
-                  onClick={() =>
-                    appDispatch({ type: "LOGIN-MODAL", payload: true })
-                  }
-                >
+                <li className="wrapper_badge" onClick={loginModalHandler}>
                   <FiLogIn />
                 </li>
               )}
