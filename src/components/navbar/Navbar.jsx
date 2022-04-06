@@ -2,16 +2,22 @@ import React from "react";
 import { BsFillHandbagFill } from "react-icons/bs";
 import { FiLogIn } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./Navbar.css";
 import { useAppContext } from "../../context/AppContext";
 export function Navbar() {
-  const { appDispatch } = useAppContext();
-
-  const loginHandler = () => {
+  const Navigate = useNavigate();
+  const { appState, appDispatch } = useAppContext();
+  const logoutHandler = () => {
+    localStorage.removeItem("token");
+    appDispatch({ type: "TOKEN", payload: null });
+    Navigate("/");
+  };
+  const loginModalHandler = () => {
     appDispatch({ type: "LOGIN-MODAL", payload: true });
   };
+  const isTokenInLocalStorage = localStorage.getItem("token");
   return (
     <>
       <nav className="h3">
@@ -39,20 +45,39 @@ export function Navbar() {
 
           <div className="">
             <ul className="flex nav_icons">
-              <li className="wrapper_badge" onClick={loginHandler}>
-                <FiLogIn />
-              </li>
+              {isTokenInLocalStorage ? (
+                <li>
+                  <button
+                    id="nav-modal"
+                    onClick={logoutHandler}
+                    className="btn btn-primary btn-login"
+                  >
+                    logout
+                  </button>
+                </li>
+              ) : (
+                <li className="wrapper_badge" onClick={loginModalHandler}>
+                  <FiLogIn />
+                </li>
+              )}
               <Link to="/wishlist">
                 <li className="wrapper_badge">
-                  <FaHeart /> <span className="badge flex-center">6+</span>
+                  <FaHeart />
+                  <span className="badge flex-center">
+                    {appState.wishListLength < 10
+                      ? appState.wishListLength
+                      : "9+"}
+                  </span>
                 </li>
-              </Link>{" "}
+              </Link>
               <Link to="/cart">
                 <li className="wrapper_badge">
                   <BsFillHandbagFill />
-                  <span className="badge flex-center">2</span>
+                  <span className="badge flex-center">
+                    {appState.cartLength < 10 ? appState.cartLength : "9+"}
+                  </span>
                 </li>
-              </Link>{" "}
+              </Link>
             </ul>
           </div>
         </div>
