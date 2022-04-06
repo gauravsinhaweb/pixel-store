@@ -66,7 +66,7 @@ export const Hero = (props) => {
                   .filter((item) => item.offer.toString() === offer)
                   .slice(0, 5)
                   .map((product) => {
-                    return <HeroDisplay product={product} />;
+                    return <HeroDisplay key={product._id} product={product} />;
                   })}
               </div>
             </div>
@@ -99,7 +99,7 @@ export const Hero = (props) => {
                 .filter((item) => item.offer.toString() === offer)
                 .slice(0, 5)
                 .map((product) => {
-                  return <HeroDisplay product={product} />;
+                  return <HeroDisplay key={product._id} product={product} />;
                 })}
             </div>
           </div>

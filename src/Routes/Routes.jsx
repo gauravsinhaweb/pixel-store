@@ -8,7 +8,13 @@ import {
 } from "react-router-dom";
 import { offerData } from "../backend/db/products";
 import MockAPI from "../backend/MockAPI";
-import { Hero, Product, ProductDetail } from "../pages/pages-index";
+import {
+  Hero,
+  Product,
+  ProductDetail,
+  SignUp,
+  Login,
+} from "../pages/pages-index";
 
 const PRODUCT_API = "/api/products";
 function RoutePage() {
@@ -48,6 +54,8 @@ function RoutePage() {
               />
               <Route exact path="/mock" element={<MockAPI />} />
             </Routes>{" "}
+            <Login />
+            <SignUp />
           </Router>
         ) : (
           <p>loading</p>
