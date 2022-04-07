@@ -17,7 +17,7 @@ export const appReducerHandler = (appState, action) => {
     case "ADD-TO-CART":
       return {
         ...appState,
-        cartItems: appState.cartItems + 1,
+        cartItems: action.payload,
         totalPrice: appState.totalPrice + Number(action.payload),
       };
     case "TOKEN":

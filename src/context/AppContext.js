@@ -10,7 +10,7 @@ export const AppProvider = ({ children }) => {
     signUpModal: false,
     wishlist: [],
     cart: [],
-    cartItems: 0,
+    cartItems: 1,
     totalPrice: 0,
     cartLength: 0,
     wishListLength: 0,

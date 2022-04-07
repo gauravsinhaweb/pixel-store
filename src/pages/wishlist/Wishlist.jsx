@@ -5,12 +5,13 @@ import axios from "axios";
 import StarRatings from "react-star-ratings";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../../context/AppContext";
+import { isProductInWishlist } from "../../utils/utils-index";
 
 export const Wishlist = () => {
   const encodedToken = localStorage.getItem("token");
   axios.defaults.headers.common["authorization"] = encodedToken;
   const [productWishlist, setProductWishlist] = useState();
-  const { appDispatch } = useAppContext();
+  const { appState, appDispatch } = useAppContext();
 
   useEffect(() => {
     (async () => {
@@ -30,6 +31,34 @@ export const Wishlist = () => {
     })();
   }, [appDispatch]);
 
+  const addToCartHandler = async (product) => {
+    if (isProductInWishlist(product, appState.cart)) {
+      return "";
+    }
+
+    try {
+      const response = await axios.post(
+        "/api/user/cart",
+        { product: product },
+        {
+          headers: {
+            authorization: encodedToken,
+          },
+        }
+      );
+      appDispatch({ type: "PRODUCT-CART", payload: response.data.cart });
+      isProductInWishlist(product, response.data.cart);
+      appDispatch({ type: "CART-LENGTH", value: response.data.cart.length });
+      // saving the encodedToken in the localStorage
+    } catch (error) {
+      if (error.response.status === 500) {
+        alert("Please login to add to cart");
+        appDispatch({ type: "LOGIN-MODAL", payload: true });
+      }
+      console.log(error);
+    }
+  };
+
   const isTokenInLocalStorage = localStorage.getItem("token");
   return (
     <>
@@ -47,15 +76,10 @@ export const Wishlist = () => {
               <div className="card_item">
                 {productWishlist &&
                   productWishlist.map(
-                    ({
-                      name,
-                      _id,
-                      image,
-                      price,
-                      productName,
-                      ratings,
-                      brand,
-                    }) => (
+                    (
+                      { name, _id, image, price, productName, ratings, brand },
+                      product
+                    ) => (
                       <div className="card_hr card_wishlist" key={_id}>
                         <div className="card_content flex">
                           <div className="img_product">
@@ -94,8 +118,21 @@ export const Wishlist = () => {
                         </div>
                         <div>
                           <div className="flex btn_wrapper btn_wrapper_hr">
-                            <button className="btn btn-cta btn_add_to_cart">
-                              move to cart
+                            <button
+                              onClick={() => addToCartHandler(product)}
+                              className="btn btn-cta btn_add_to_cart"
+                            >
+                              {isProductInWishlist(product, appState.cart) ? (
+                                <>
+                                  <Link to="/cart">
+                                    <span>go to cart</span>
+                                  </Link>
+                                </>
+                              ) : (
+                                <>
+                                  <span>move to cart</span>
+                                </>
+                              )}
                             </button>
                           </div>
                         </div>

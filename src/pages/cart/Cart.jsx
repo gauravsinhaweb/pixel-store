@@ -11,11 +11,10 @@ export const Cart = () => {
   axios.defaults.headers.common["authorization"] = encodedToken;
 
   const { appState, appDispatch } = useAppContext();
-  const [cartItemValue, setCartItemValue] = useState(0);
   const productCart = appState.cart;
+  const [cartItemValue, setCartItemValue] = useState(productCart);
   useEffect(() => {
     (async () => {
-      setCartItemValue(appState.cartItems);
       try {
         const response = await axios.get("/api/user/cart");
         response &&
@@ -35,25 +34,50 @@ export const Cart = () => {
 
   const priceHandler = {
     price:
-      productCart &&
-      productCart.reduce(
-        (acc, item) => acc + Number(item.price) + appState.totalPrice,
+      cartItemValue &&
+      cartItemValue.reduce(
+        (acc, item) =>
+          acc + Number(item.price * item.quantity) + appState.totalPrice,
         0
       ),
     discount:
-      productCart &&
-      productCart.reduce(
+      cartItemValue &&
+      cartItemValue.reduce(
         (acc, item) =>
           acc +
-          (Number(item.price) - (50 / 100) * Number(item.price)) +
+          (Number(item.price * item.quantity) -
+            (50 / 100) * Number(item.price * item.quantity)) +
           appState.totalPrice,
         0
       ),
     delivery:
-      productCart &&
-      productCart.reduce((acc, item) => acc + Number(item.price), 0) +
+      cartItemValue &&
+      cartItemValue.reduce(
+        (acc, item) => acc + Number(item.price * item.quantity),
+        0
+      ) +
         appState.totalPrice * 0.05,
   };
+
+  function increaseQty(itemID) {
+    setCartItemValue(
+      cartItemValue.map((item) =>
+        item._id === itemID ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  }
+
+  function decreaseQty(itemID) {
+    setCartItemValue(
+      cartItemValue.map((item) =>
+        item._id === itemID
+          ? item.quantity > 0
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+          : item
+      )
+    );
+  }
   const isTokenInLocalStorage = localStorage.getItem("token");
   return (
     <>
@@ -64,8 +88,8 @@ export const Cart = () => {
             <>
               <div className="wrapper_items">
                 <div className="text_cl h3 text-head">Shopping Cart</div>
-                {productCart &&
-                  productCart.map(
+                {cartItemValue &&
+                  cartItemValue.map(
                     ({
                       _id,
                       name,
@@ -74,6 +98,7 @@ export const Cart = () => {
                       productName,
                       ratings,
                       brand,
+                      quantity,
                     }) => (
                       <div className="card_hr  flex" key={_id}>
                         <div className="img_cart">
@@ -105,19 +130,14 @@ export const Cart = () => {
                               deal of the day:
                               <span className="h2 dod_price">
                                 {" "}
-                                {` $${parseFloat(appState.totalPrice)}`}
+                                {` $${parseFloat(price * quantity)}`}
                               </span>
                             </div>
                           </div>
                         </div>
                         <div className="flex-center btn_wrapper_hr">
                           <button
-                            onClick={() =>
-                              appDispatch({
-                                type: "REMOVE-FROM-CART",
-                                payload: price,
-                              })
-                            }
+                            onClick={() => decreaseQty(_id)}
                             className="btn out-cta btn_count"
                           >
                             -
@@ -125,18 +145,12 @@ export const Cart = () => {
                           <label htmlFor="cartItem"></label>
                           <input
                             id="cartItem"
-                            value={cartItemValue}
-                            onChange={(e) => setCartItemValue(e.target.value)}
                             className="p-lg"
+                            value={quantity}
                             type="number"
                           />
                           <button
-                            onClick={() =>
-                              appDispatch({
-                                type: "ADD-TO-CART",
-                                payload: price,
-                              })
-                            }
+                            onClick={() => increaseQty(_id)}
                             className="btn btn-cta btn_count"
                           >
                             +
