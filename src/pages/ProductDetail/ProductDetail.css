@@ -4,7 +4,9 @@
   min-height: 100vh;
   gap: 12rem;
 }
-.product_content * {
+.product_content div,
+h1,
+p {
   margin: 2rem 0;
 }
 .product_img {
