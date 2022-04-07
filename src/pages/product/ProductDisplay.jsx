@@ -7,16 +7,17 @@ import StarRatings from "react-star-ratings";
 import { useAppContext } from "../../context/AppContext";
 import { postWishlist } from "../../utils/utils-index";
 import { isProductInWishlist } from "../../utils/wishlist/wishlist-utils";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const ProductDisplay = (props) => {
   const {
-    product: { name, image, price, productName, ratings },
+    product: { _id, name, image, price, productName, ratings },
     product,
   } = props;
   const { appState, appDispatch } = useAppContext();
   const [isHeartClicked, setIsHeartClicked] = useState("emptyWishlist");
   const encodedToken = localStorage.getItem("token");
+  const Navigate = useNavigate();
 
   const addToWishlist = async (product) => {
     setIsHeartClicked("filledWishlist");
@@ -54,7 +55,13 @@ export const ProductDisplay = (props) => {
   return (
     <>
       <div>
-        <div className="card_hr flex-center card_product">
+        <div
+          className="card_hr flex-center card_product"
+          onClick={() =>
+            appDispatch({ type: "PRODUCT", payload: product }) +
+            Navigate(`/product/${_id}`)
+          }
+        >
           <div className="card_hr_img flex-center">
             <img src={image} className="card_img_product" alt={productName} />
           </div>

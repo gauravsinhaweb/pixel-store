@@ -52,7 +52,7 @@ export const ProductDetail = () => {
             <img src={product.image} className="product_img" alt="product_1" />
           </div>
         </div>
-        <div className="product_content">
+        <div className="product_detail_content">
           <h1 className="h1 kodchasan">{product.name}</h1>{" "}
           <StarRatings
             rating={product.ratings}
@@ -63,9 +63,9 @@ export const ProductDetail = () => {
           <p className="p-lg product_Description work-sans">
             {product.description}
           </p>
-          <div className="h3 text_cl">{`Brand:  ${product.brand}`}</div>
-          <div className="h3 text_cl">{`Price:   $ ${product.price}`}</div>
-          <div className="h3 text_cl">{`material:   ${product.material}`}</div>{" "}
+          <div className="h3 text_cl product_detail_content">{`Brand:  ${product.brand}`}</div>
+          <div className="h3 text_cl product_detail_content">{`Price:   $ ${product.price}`}</div>
+          <div className="h3 text_cl product_detail_content">{`material:   ${product.material}`}</div>{" "}
           <div className="flex btn_wrapper btn_wrapper_hr ">
             {" "}
             <button
