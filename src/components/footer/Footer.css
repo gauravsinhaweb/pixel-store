@@ -6,7 +6,7 @@
 .home_footer {
   justify-content: space-around;
   align-items: center;
-  color: var(--text-primary);
+  color: var(--bg-color-light);
   overflow: hidden;
 }
 .footer_ul > li {
