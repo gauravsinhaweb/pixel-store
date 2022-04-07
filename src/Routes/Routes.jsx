@@ -59,7 +59,7 @@ function RoutePage() {
                 element={<ProductDetail />}
               />
               <Route exact path="/wishlist" element={<Wishlist />} />
-              <Route exact path="/cart" element={<Cart />} />
+              <Route exact path="/cart" element={<Cart data={data} />} />
               <Route path="*" element={<Page404 />} />
               <Route exact path="/mock" element={<MockAPI />} />
             </Routes>{" "}
