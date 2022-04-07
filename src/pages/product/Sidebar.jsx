@@ -194,6 +194,7 @@ export const Sidebar = (props) => {
             type="radio"
             checked={!filter.sortByPrice ? false : null}
             id="price-hl"
+            onChange={() => dispatch({ type: "HIGH-LOW" })}
           />
           <label htmlFor="price-hl">Price - High to Low</label>
         </p>

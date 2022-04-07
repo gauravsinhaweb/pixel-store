@@ -52,17 +52,18 @@ export const ProductDisplay = (props) => {
       console.log(error);
     }
   };
+
   return (
     <>
       <div>
-        <div
-          className="card_hr flex-center card_product"
-          onClick={() =>
-            appDispatch({ type: "PRODUCT", payload: product }) +
-            Navigate(`/product/${_id}`)
-          }
-        >
-          <div className="card_hr_img flex-center">
+        <div className="card_hr flex-center card_product">
+          <div
+            className="card_hr_img flex-center"
+            onClick={() =>
+              appDispatch({ type: "PRODUCT", payload: product }) +
+              Navigate(`/product/${_id}`)
+            }
+          >
             <img src={image} className="card_img_product" alt={productName} />
           </div>
           <div
@@ -71,7 +72,13 @@ export const ProductDisplay = (props) => {
           >
             <RiHeartFill />
           </div>
-          <div className="card_hr_content">
+          <div
+            className="card_hr_content"
+            onClick={() =>
+              appDispatch({ type: "PRODUCT", payload: product }) +
+              Navigate(`/product/${_id}`)
+            }
+          >
             <p title={name} className="h3 card_name_product">
               {name}
             </p>
