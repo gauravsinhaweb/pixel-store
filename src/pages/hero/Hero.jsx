@@ -50,7 +50,7 @@ export const Hero = (props) => {
           </div>
           {offerData.map((offer) => (
             <div key={offer} id="head">
-              <div className="flex wrapper_head montserrat">
+              <div className="flex wrapper_head montserrat m-0">
                 <h2 className="head_text">{offer}</h2>
                 <Link
                   to={`/products/${offer
@@ -83,7 +83,7 @@ export const Hero = (props) => {
         </div>
         {offerData.map((offer) => (
           <div key={offer} id="head">
-            <div className="flex wrapper_head montserrat">
+            <div className="flex wrapper_head montserrat m-0">
               <h2 className="head_text">{offer}</h2>
               <Link
                 to={`/product/${offer

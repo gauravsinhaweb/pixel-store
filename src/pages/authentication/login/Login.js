@@ -43,8 +43,8 @@ export const Login = () => {
     e.preventDefault();
 
     setLoginData({
-      email: "adarshbalika@gmail.com",
-      password: "adarshbalika",
+      email: "johndoe@gmail.com",
+      password: "cooljohndoe",
     });
   };
   return (
