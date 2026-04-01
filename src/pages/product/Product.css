@@ -24,7 +24,7 @@ main {
   flex-flow: row wrap;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 2rem;
+  gap: 1.6rem;
   min-height: 100vh;
 }
 
@@ -32,6 +32,9 @@ main {
   margin: 0;
   width: 28rem;
   transform: scale(0.9);
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
 }
 
 .card_name_product {
@@ -56,7 +59,9 @@ main {
   font-size: 2.4rem;
   cursor: pointer;
   border: none;
-  background-color: var(--white);
+  background-color: #fff;
+  border-radius: 99px;
+  padding: 0.4rem;
 }
 
 .emptyWishlist {
@@ -78,6 +83,10 @@ main {
 /* filter  */
 .wrapper_filter {
   margin: 2rem;
+  padding: 1.2rem;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
 }
 
 .filter_head_text {
@@ -104,4 +113,44 @@ main {
 
 .slider {
   height: 4px;
+}
+@media screen and (max-width: 64rem) {
+  .wrapper_product {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "aside"
+      "main";
+    padding-top: 7rem;
+  }
+  aside {
+    position: static;
+    width: 100%;
+    z-index: auto;
+  }
+  .wrapper_filter {
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 0.6rem;
+    background: #f8f8f8;
+  }
+  .wrapper_card_product {
+    justify-content: center;
+    padding: 1rem 0.8rem 2rem;
+  }
+  .card_product {
+    width: min(100%, 30rem);
+    transform: none;
+  }
+}
+@media screen and (max-width: 30rem) {
+  .wrapper_product {
+    padding-top: 10rem;
+  }
+  .card_img_product {
+    width: 16rem;
+    height: 16rem;
+  }
+  .btn_add_to_cart span {
+    padding: 0.4rem;
+  }
 }

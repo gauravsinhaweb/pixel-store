@@ -21,3 +21,16 @@
 .modal > .card-content {
   padding: 0;
 }
+@media screen and (max-width: 48rem) {
+  .modal > .modal_box {
+    width: min(95vw, 40rem);
+    margin: 0 auto;
+  }
+  .modal_img {
+    display: none;
+  }
+  .modal_content {
+    width: 100%;
+    padding: 1rem;
+  }
+}

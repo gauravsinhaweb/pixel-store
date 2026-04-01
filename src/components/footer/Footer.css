@@ -1,24 +1,32 @@
 .home_footer {
-  height: 30rem;
-  background-color: var(--cta);
+  height: auto;
+  background: #121826;
+  padding: 3rem 1.6rem;
 }
 
 .home_footer {
   justify-content: space-around;
   align-items: center;
-  color: var(--bg-color-light);
+  color: #e5e7eb;
   overflow: hidden;
 }
 .footer_ul > li {
   padding: 0.5rem 0;
+}
+.footer_ul > li:first-child {
+  color: #fff;
+  letter-spacing: 0.04em;
 }
 
 @media screen and (max-width: 60rem) {
   .home_footer {
     justify-content: center;
     gap: 2rem;
+    height: auto;
+    padding: 2rem 1rem;
+    flex-wrap: wrap;
   }
   .footer_ul li {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 }

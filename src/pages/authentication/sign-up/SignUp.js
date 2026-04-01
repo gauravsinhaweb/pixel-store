@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./signUp.css";
 import { BsXLg } from "react-icons/bs";
 import { useAppContext } from "../../../context/AppContext";
-import axios from "axios";
 import { RiEyeCloseLine, RiEyeFill } from "react-icons/ri";
+import { signupLocalUser } from "../../../services/localAuth";
 
 export const SignUp = () => {
   let signUpDisplay;
@@ -31,14 +31,11 @@ export const SignUp = () => {
       alert("Passwords do not match");
     } else {
       try {
-        const response = await axios.post(`/api/auth/signup`, signupData);
-        // saving the encodedToken in the localStorage
-        localStorage.setItem("token", response.data.encodedToken);
-        console.log(response);
+        const response = signupLocalUser(signupData);
+        localStorage.setItem("token", response.encodedToken);
         appDispatch({ type: "SIGNUP-MODAL", payload: false });
       } catch (error) {
         alert("invalid credentials");
-        console.log(error);
       }
     }
   };

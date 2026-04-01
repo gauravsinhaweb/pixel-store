@@ -2,13 +2,51 @@ nav {
   position: fixed;
   z-index: var(--index-999);
   width: 100%;
+  left: 0;
+  right: 0;
+  backdrop-filter: blur(6px);
+}
+.wrapper_nav {
+  box-sizing: border-box;
+  width: 100%;
+  gap: 1rem;
+  padding: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: hidden;
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid #ececec;
+}
+.wrapper_nav .nav_brand_text {
+  font-size: 2rem;
+  white-space: nowrap;
+}
+.wrapper_nav .nav_icons {
+  gap: 1rem;
+  align-items: center;
 }
 .wrapper_badge {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
 }
 .wrapper_badge:hover {
   color: var(--btn-yellow);
 }
-.category_list li:hover {
-  color: var(--btn-yellow);
+.nav_icons {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media screen and (max-width: 48rem) {
+  .wrapper_nav {
+    flex-wrap: wrap;
+  }
+  .wrapper_nav .nav_brand_text {
+    font-size: 1.8rem;
+  }
+  .wrapper_nav .nav_icons {
+    gap: 0.8rem;
+  }
+  .wrapper_badge {
+    font-size: 2rem;
+  }
 }

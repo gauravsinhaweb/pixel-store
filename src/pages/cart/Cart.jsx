@@ -1,32 +1,24 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import StarRatings from "react-star-ratings";
 import { Navbar } from "../../components/components-index";
 import { useAppContext } from "../../context/AppContext";
 import { Link } from "react-router-dom";
 import "./Cart.css";
+import { getLocalCart } from "../../services/localAuth";
 
 export const Cart = () => {
-  const encodedToken = localStorage.getItem("token");
-  axios.defaults.headers.common["authorization"] = encodedToken;
-
   const { appState, appDispatch } = useAppContext();
   const productCart = appState.cart;
   const [cartItemValue, setCartItemValue] = useState(productCart);
   useEffect(() => {
     (async () => {
       try {
-        const response = await axios.get("/api/user/cart");
-        response &&
-          appDispatch({ type: "PRODUCT-CART", payload: response.data.cart });
+        const cart = getLocalCart();
+        appDispatch({ type: "PRODUCT-CART", payload: cart });
       } catch (error) {
         if (error.response.status === 500) {
           alert("you need to login");
           appDispatch({ type: "LOGIN-MODAL", payload: true });
-        } else if (error.response.status === 409) {
-          alert("already in wishlist");
-        } else {
-          console.log(error);
         }
       }
     })();
@@ -192,7 +184,7 @@ export const Cart = () => {
                 </div>
 
                 <div className="footer btn_wrapper_cwd flex-center">
-                  <button className="btn btn-cta btn_order">place order</button>
+                  <div className="p-lg text_cl">Checkout is coming soon</div>
                 </div>
               </div>
             </>

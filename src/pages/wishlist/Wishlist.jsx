@@ -1,31 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Navbar } from "../../components/components-index";
 import "./Wishlist.css";
-import axios from "axios";
 import StarRatings from "react-star-ratings";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../../context/AppContext";
 import { isProductInWishlist } from "../../utils/utils-index";
+import { addToLocalCart, getLocalWishlist } from "../../services/localAuth";
 
 export const Wishlist = () => {
-  const encodedToken = localStorage.getItem("token");
-  axios.defaults.headers.common["authorization"] = encodedToken;
   const [productWishlist, setProductWishlist] = useState();
   const { appState, appDispatch } = useAppContext();
 
   useEffect(() => {
     (async () => {
       try {
-        const response = await axios.get("/api/user/wishlist");
-        setProductWishlist(response.data.wishlist);
+        const wishlist = getLocalWishlist();
+        setProductWishlist(wishlist);
       } catch (error) {
         if (error.response.status === 500) {
           alert("you need to login");
           appDispatch({ type: "LOGIN-MODAL", payload: true });
-        } else if (error.response.status === 409) {
-          alert("already in wishlist");
-        } else {
-          console.log(error);
         }
       }
     })();
@@ -37,25 +31,15 @@ export const Wishlist = () => {
     }
 
     try {
-      const response = await axios.post(
-        "/api/user/cart",
-        { product: product },
-        {
-          headers: {
-            authorization: encodedToken,
-          },
-        }
-      );
-      appDispatch({ type: "PRODUCT-CART", payload: response.data.cart });
-      isProductInWishlist(product, response.data.cart);
-      appDispatch({ type: "CART-LENGTH", value: response.data.cart.length });
-      // saving the encodedToken in the localStorage
+      const cart = addToLocalCart(product);
+      appDispatch({ type: "PRODUCT-CART", payload: cart });
+      isProductInWishlist(product, cart);
+      appDispatch({ type: "CART-LENGTH", value: cart.length });
     } catch (error) {
       if (error.response.status === 500) {
         alert("Please login to add to cart");
         appDispatch({ type: "LOGIN-MODAL", payload: true });
       }
-      console.log(error);
     }
   };
 
@@ -76,10 +60,7 @@ export const Wishlist = () => {
               <div className="card_item">
                 {productWishlist &&
                   productWishlist.map(
-                    (
-                      { name, _id, image, price, productName, ratings, brand },
-                      product
-                    ) => (
+                    ({ name, _id, image, price, productName, ratings, brand }) => (
                       <div className="card_hr card_wishlist" key={_id}>
                         <div className="card_content flex">
                           <div className="img_product">
@@ -119,7 +100,17 @@ export const Wishlist = () => {
                         <div>
                           <div className="flex btn_wrapper btn_wrapper_hr">
                             <button
-                              onClick={() => addToCartHandler(product)}
+                              onClick={() =>
+                                addToCartHandler({
+                                  name,
+                                  _id,
+                                  image,
+                                  price,
+                                  productName,
+                                  ratings,
+                                  brand,
+                                })
+                              }
                               className="btn btn-cta btn_add_to_cart"
                             >
                               {isProductInWishlist(product, appState.cart) ? (

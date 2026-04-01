@@ -1,13 +1,10 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
-  useParams,
 } from "react-router-dom";
-import { offerData } from "../backend/db/products";
-import MockAPI from "../backend/MockAPI";
+import { offerData, products } from "../data/products";
 import {
   Hero,
   Product,
@@ -21,25 +18,19 @@ import {
 import "../App.css";
 import { ScrollToTop } from "../utils/utils-index";
 
-const PRODUCT_API = "/api/products";
 function RoutePage() {
-  let { productOffer, productID } = useParams;
   const [data, setData] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios(PRODUCT_API);
-      setData(res.data.products);
-      setLoading(true);
-    };
-    fetchData();
-  }, [loading]);
+    setData(products);
+    setLoading(false);
+  }, []);
 
   return (
     <>
       <div className="container">
-        {loading ? (
+        {!loading ? (
           <Router>
             <ScrollToTop />
             <Routes>
@@ -50,19 +41,18 @@ function RoutePage() {
               />
               <Route
                 exact
-                path={`/products/:${productOffer}`}
+                path="/products/:productOffer"
                 element={<Product productData={data} />}
               />
               <Route
                 exact
-                path={`/product/:${productID}`}
+                path="/product/:productID"
                 element={<ProductDetail />}
               />
               <Route exact path="/wishlist" element={<Wishlist />} />
               <Route exact path="/cart" element={<Cart data={data} />} />
               <Route path="*" element={<Page404 />} />
-              <Route exact path="/mock" element={<MockAPI />} />
-            </Routes>{" "}
+            </Routes>
             <Login />
             <SignUp />
           </Router>

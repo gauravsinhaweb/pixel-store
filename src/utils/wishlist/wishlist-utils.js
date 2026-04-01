@@ -1,20 +1,12 @@
-import axios from "axios";
+import { addToLocalWishlist } from "../../services/localAuth";
 
 export const postWishlist = async (product, encodedToken, appDispatch) => {
   try {
-    const response = await axios.post(
-      "/api/user/wishlist",
-      { product: product },
-      {
-        headers: {
-          authorization: encodedToken,
-        },
-      }
-    );
+    const wishlist = addToLocalWishlist(product);
 
     appDispatch({
       type: "WISHLIST-LENGTH",
-      value: response.data.wishlist.length,
+      value: wishlist.length,
     });
   } catch (error) {
     if (error.response.status === 409) {

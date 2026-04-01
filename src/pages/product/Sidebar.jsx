@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-const CATEGORY_API = "/api/categories";
+import { categories } from "../../data/categories";
 export const Sidebar = (props) => {
   const { filter, dispatch } = props;
 
   const [categoryList, setCategoryList] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const initialFilterState = {
     category: [],
     rating: 0,
@@ -24,13 +23,9 @@ export const Sidebar = (props) => {
     });
   };
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios(CATEGORY_API);
-      setCategoryList(res.data.categories);
-      setLoading(true);
-    };
-    fetchData();
-  }, [loading]);
+    setCategoryList(categories);
+    setLoading(false);
+  }, []);
   return (
     <aside>
       <div className="wrapper_filter">

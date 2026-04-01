@@ -27,21 +27,6 @@ export function Navbar() {
               pixel.<span className="store">store</span>
             </div>
           </Link>
-          <div>
-            <ul className="flex p category_list">
-              <li>games</li>
-              <li>hardware</li>
-              <li>service</li>
-              <li>shop</li>
-            </ul>
-          </div>
-          <div>
-            <input
-              className="basic_inp inp_sm"
-              type="text"
-              placeholder="search"
-            />
-          </div>
 
           <div className="">
             <ul className="flex nav_icons">

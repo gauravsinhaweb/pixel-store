@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import { BsXLg } from "react-icons/bs";
 import { useAppContext } from "../../../context/AppContext";
-import axios from "axios";
+import { loginLocalUser } from "../../../services/localAuth";
 
 export const Login = () => {
   let loginDisplay;
@@ -24,18 +24,11 @@ export const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`/api/auth/login`, loginData);
-      if (response.status === 200) {
-        localStorage.setItem("token", response.data.encodedToken);
-        appDispatch({ type: "LOGIN-MODAL", payload: false });
-      } else {
-        alert("Invalid Credentials");
-      }
-
-      // saving the encodedToken in the localStorage
+      const response = loginLocalUser(loginData);
+      localStorage.setItem("token", response.encodedToken);
+      appDispatch({ type: "LOGIN-MODAL", payload: false });
     } catch (error) {
       alert("Invalid Credentials");
-      console.log(error);
     }
   };
 

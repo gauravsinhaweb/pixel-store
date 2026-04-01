@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar } from "../../components/components-index";
@@ -6,6 +5,7 @@ import { useAppContext } from "../../context/AppContext";
 import { isProductInWishlist, postWishlist } from "../../utils/utils-index";
 import "./ProductDetail.css";
 import StarRatings from "react-star-ratings";
+import { addToLocalCart } from "../../services/localAuth";
 
 export const ProductDetail = () => {
   const { appState, appDispatch } = useAppContext();
@@ -22,25 +22,15 @@ export const ProductDetail = () => {
     }
 
     try {
-      const response = await axios.post(
-        "/api/user/cart",
-        { product: product },
-        {
-          headers: {
-            authorization: encodedToken,
-          },
-        }
-      );
-      appDispatch({ type: "PRODUCT-CART", payload: response.data.cart });
-      isProductInWishlist(product, response.data.cart);
-      appDispatch({ type: "CART-LENGTH", value: response.data.cart.length });
-      // saving the encodedToken in the localStorage
+      const cart = addToLocalCart(product);
+      appDispatch({ type: "PRODUCT-CART", payload: cart });
+      isProductInWishlist(product, cart);
+      appDispatch({ type: "CART-LENGTH", value: cart.length });
     } catch (error) {
       if (error.response.status === 500) {
         alert("Please login to add to cart");
         appDispatch({ type: "LOGIN-MODAL", payload: true });
       }
-      console.log(error);
     }
   };
   return (

@@ -3,6 +3,8 @@
   align-items: center;
   min-height: 100vh;
   gap: 12rem;
+  padding: 8rem 1rem 2rem;
+  flex-wrap: wrap;
 }
 .product_detail_content {
   margin: 2rem 0;
@@ -13,4 +15,22 @@
 .product_Description {
   width: 60rem;
   font-size: 2rem;
+}
+@media screen and (max-width: 64rem) {
+  .wrapper_product_list {
+    gap: 2rem;
+  }
+  .product_img {
+    width: min(100%, 32rem);
+  }
+  .product_Description {
+    width: 100%;
+    max-width: 62rem;
+    font-size: 1.8rem;
+  }
+}
+@media screen and (max-width: 30rem) {
+  .wrapper_product_list {
+    padding-top: 10rem;
+  }
 }

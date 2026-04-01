@@ -1,8 +1,7 @@
-import axios from "axios";
+import { products } from "../../data/products";
 export const getDataFromBackend = async () => {
   try {
-    const response = await axios.get("/api/products");
-    console.log(response.data.products);
+    console.log(products);
   } catch (error) {
     console.log(error);
   }

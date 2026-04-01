@@ -86,7 +86,7 @@ export const Hero = (props) => {
             <div className="flex wrapper_head montserrat m-0">
               <h2 className="head_text">{offer}</h2>
               <Link
-                to={`/product/${offer
+                to={`/products/${offer
                   .replace(/ /g, "")
                   .replace(/\d+% ?/g, "")
                   .toLowerCase()}`}

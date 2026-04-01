@@ -1,10 +1,9 @@
-@import url("https://pixeldesign.netlify.app/pixel-design.css");
-@import url("https://fonts.googleapis.com/css2?family=Kodchasan:wght@200;300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600;700;800;900&family=Work+Sans:wght@200;300;400;500;600;700&display=swap");
-
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #f6f8fc;
+  color: #111827;
 }
 body::-webkit-scrollbar {
   display: none;
@@ -31,6 +30,7 @@ html {
 .container {
   font-family: "Montserrat", sans-serif, "Work Sans", sans-serif, "Kodchasan",
     sans-serif;
+  min-height: 100vh;
 }
 .montserrat {
   font-family: "Montserrat", sans-serif;
@@ -40,4 +40,12 @@ html {
 }
 .kodchasan {
   font-family: "Kodchasan", sans-serif;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+a {
+  text-decoration: none;
+  color: inherit;
 }
